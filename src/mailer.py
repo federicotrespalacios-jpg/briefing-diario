@@ -59,6 +59,12 @@ def _post_resend(api_key: str, payload: dict) -> dict:
         headers={
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
+            # Sin esto, urllib manda "Python-urllib/3.x" como User-Agent, que
+            # el Cloudflare delante de la API de Resend bloquea directamente
+            # (error 1010 -- "browser signature banned"). Con un User-Agent
+            # normal la petición pasa sin problema.
+            "User-Agent": "briefing-diario/1.0",
+            "Accept": "application/json",
         },
     )
     try:
