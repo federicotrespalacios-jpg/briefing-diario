@@ -1,0 +1,137 @@
+# ============================================================
+# briefing-diario — configuración única del sistema
+# Ajusta aquí sin tocar código. Los prompts viven en .claude/skills/
+# ============================================================
+
+entrega:
+  # Hora local objetivo en Europe/Madrid. El cron de GitHub corre en UTC:
+  # el workflow dispara dos veces (invierno y verano) y un guard aborta
+  # la ejecucion que no corresponde. Ver .github/workflows/daily.yml
+  hora_local: "06:05"
+  zona_horaria: "Europe/Madrid"
+  destinatarios:
+    - federico.trespalacios@gmail.com
+  remitente_nombre: "Briefing diario"
+  asunto: "Briefing · {fecha_larga}"
+
+longitud:
+  # Calibrado a ~200 palabras/minuto en espanol.
+  # Se valida programaticamente: fuera de rango, el build falla.
+  # Recortado el 2026-08-12 a peticion de Federico: directo a los datos,
+  # sin relleno narrativo. Ver briefing-write/SKILL.md para el porque.
+  actualidad:
+    min: 700
+    max: 850
+    minutos_lectura: 4
+  cultura:
+    min: 1400
+    max: 1700
+    minutos_lectura: 8
+
+actualidad:
+  historias_min: 3
+  historias_max: 5
+  fuentes_por_historia_min: 2
+  antiguedad_maxima_horas: 72
+  ejes:
+    - geopolitica
+    - economia y mercados
+    - medioambiente y clima
+    - ciencia y tecnologia con impacto global
+  enfoque: >-
+    Global sobre todo. Espana solo entra si la noticia es realmente relevante
+    a nivel internacional, o si afecta de forma directa y concreta a un
+    residente en Espana.
+
+cultura:
+  categorias:
+    - ciencia
+    - historia
+    - arte
+    - filosofia
+    - deportes
+    - entretenimiento
+    - tecnologia
+    - psicologia
+    - linguistica
+    - economia_conductual
+  # Nunca dos dias seguidos de la misma categoria.
+  rotacion_forzada: true
+  # Dias que deben pasar antes de que una categoria pueda repetirse.
+  dias_bloqueo_categoria: 3
+
+fuentes:
+  # Preferidas: se prioriza en la seleccion, no se restringe a ellas.
+  preferidas:
+    - reuters.com
+    - apnews.com
+    - ft.com
+    - economist.com
+    - bloomberg.com
+    - nytimes.com
+    - wsj.com
+    - theguardian.com
+    - bbc.com
+    - nature.com
+    - science.org
+    - arxiv.org
+    - imf.org
+    - worldbank.org
+    - un.org
+    - ec.europa.eu
+    - ecb.europa.eu
+    - federalreserve.gov
+    - who.int
+    - ipcc.ch
+    - noaa.gov
+    - esa.int
+    - nasa.gov
+  # Vetadas: nunca se citan como fuente.
+  vetadas:
+    - contentfarm.example
+    - dailymail.co.uk
+    - rt.com
+    - sputniknews.com
+  # Se prefiere la fuente primaria (comunicado, informe, paper) al agregador.
+  preferir_primarias: true
+
+modelo:
+  # Sonnet: la cuota del plan Pro es compartida con tu uso interactivo.
+  # Subir a Opus solo si la medicion de la primera semana lo permite.
+  nombre: "claude-sonnet-5"
+  # Tope de gasto por fase, en dolares "de lista" (lo que informa
+  # `claude -p --output-format json` como total_cost_usd). En un plan
+  # Pro/Max esto NO se factura aparte -- consume tu cupo de suscripcion,
+  # no dinero adicional -- pero es el numero mas honesto disponible para
+  # poner un techo real por fase. `claude --help` no expone `--max-turns`
+  # en la version actual del CLI (2.1.228): el control real de gasto es
+  # `--max-budget-usd`, medido en vivo el 2026-08-12/13:
+  #   investigacion (sin tope): $2.34  -- redaccion (sin tope): $1.66
+  #   verificacion (sin tope, 54 turnos): $3.08
+  # Los topes de abajo dejan margen sobre lo medido para investigacion y
+  # redaccion, y BAJAN el de verificacion a proposito para forzar que sea
+  # mas selectiva en que verifica -- ver briefing-verify/SKILL.md.
+  max_budget_usd_research: 3.00
+  max_budget_usd_write: 2.00
+  max_budget_usd_verify: 2.25
+
+validacion:
+  # 404 o DNS inexistente rompen el build. 403/429 solo avisan:
+  # muchos medios bloquean IPs de datacenter y seria un falso negativo.
+  url_codigos_fatales: [404, 410]
+  url_timeout_segundos: 12
+  fallar_si_tema_repetido: true
+
+fallo:
+  # Politica elegida: reintentar y degradar.
+  reintentos_por_fase: 1
+  # Si tras el reintento sigue fallando, se envia lo que si paso validacion.
+  degradar: true
+  # Minimo publicable: si no hay ni esto, se manda solo email de aviso.
+  minimo_historias: 2
+
+web:
+  titulo: "Briefing diario"
+  descripcion: "Cinco minutos de actualidad y diez de cultura general. Cada manana."
+  url_base: ""  # se rellena tras activar GitHub Pages
+  briefings_por_pagina: 30

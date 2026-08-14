@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>{{ titulo_email }}</title>
+<!--[if mso]>
+<noscript>
+<xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+</noscript>
+<![endif]-->
+<style>
+  body, table, td { margin: 0; padding: 0; }
+  img { border: 0; line-height: 100%; outline: none; text-decoration: none; }
+  table { border-collapse: collapse !important; }
+  body { height: 100% !important; width: 100% !important; }
+
+  :root {
+    color-scheme: light dark;
+    supported-color-schemes: light dark;
+  }
+
+  .bg-outer   { background-color: #f2ede4; }
+  .bg-card    { background-color: #fffdf9; }
+  .txt-body   { color: #2b2620; }
+  .txt-muted  { color: #6f6656; }
+  .txt-accent { color: #9a4a2b; }
+  .rule       { border-top: 1px solid #e3dcca; }
+  .badge      { background-color: #efe6d3; color: #6f4a2b; }
+
+  @media (prefers-color-scheme: dark) {
+    .bg-outer   { background-color: #17140f !important; }
+    .bg-card    { background-color: #201b14 !important; }
+    .txt-body   { color: #ece5d6 !important; }
+    .txt-muted  { color: #b3a98f !important; }
+    .txt-accent { color: #e08a5c !important; }
+    .rule       { border-top: 1px solid #3a3327 !important; }
+    .badge      { background-color: #3a3327 !important; color: #e0c9a6 !important; }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .container { width: 100% !important; }
+    .px { padding-left: 20px !important; padding-right: 20px !important; }
+    h1.title { font-size: 22px !important; line-height: 28px !important; }
+    h2.section-title { font-size: 19px !important; }
+  }
+</style>
+</head>
+<body class="bg-outer" style="margin:0; padding:0; font-family: Georgia, 'Times New Roman', serif;">
+<div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+  {{ preheader }}
+</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg-outer">
+  <tr>
+    <td align="center" style="padding: 28px 12px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px; max-width:600px;">
+
+        <!-- Cabecera -->
+        <tr>
+          <td class="px" style="padding: 0 24px 20px 24px;" align="center">
+            <div class="txt-muted" style="font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;">
+              Briefing diario
+            </div>
+            <h1 class="title txt-body" style="margin: 6px 0 0 0; font-size: 24px; line-height: 30px; font-weight: 700;">
+              {{ fecha_larga }}
+            </h1>
+          </td>
+        </tr>
+
+        <!-- Tarjeta -->
+        <tr>
+          <td>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg-card" style="border-radius: 14px;">
+
+              <!-- Sección actualidad -->
+              <tr>
+                <td class="px" style="padding: 28px 32px 6px 32px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <h2 class="section-title txt-body" style="margin:0; font-size: 21px; font-weight: 700;">Actualidad</h2>
+                      </td>
+                      <td align="right">
+                        <span class="badge" style="font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 11px; padding: 4px 10px; border-radius: 999px; white-space: nowrap;">
+                          {{ minutos_actualidad }} min de lectura
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="px" style="padding: 4px 32px 8px 32px;">
+                  <p class="txt-body" style="margin: 0 0 20px 0; font-size: 17px; line-height: 27px; font-style: italic;">
+                    {{ arranque }}
+                  </p>
+                  {% for historia in historias %}
+                  <h3 class="txt-body" style="margin: 22px 0 8px 0; font-size: 16px; font-weight: 700; line-height: 22px;">
+                    {{ historia.titular_editorial }}
+                  </h3>
+                  {% for parrafo in historia.parrafos %}
+                  <p class="txt-body" style="margin: 0 0 12px 0; font-size: 16px; line-height: 25px;">{{ parrafo }}</p>
+                  {% endfor %}
+                  {% endfor %}
+                  <div class="rule" style="margin: 20px 0;"></div>
+                  <p class="txt-muted" style="margin: 0 0 4px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                    En el radar
+                  </p>
+                  <p class="txt-body" style="margin: 0; font-size: 15px; line-height: 23px;">{{ radar_texto }}</p>
+                </td>
+              </tr>
+
+              <!-- Separador entre secciones -->
+              <tr>
+                <td class="px" style="padding: 30px 32px 0 32px;">
+                  <div style="border-top: 6px solid; border-image: none;" class="rule"></div>
+                </td>
+              </tr>
+
+              <!-- Sección cultura -->
+              <tr>
+                <td class="px" style="padding: 26px 32px 6px 32px;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <span class="txt-accent" style="font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">
+                          {{ categoria_cultura }}
+                        </span>
+                        <h2 class="section-title txt-body" style="margin:4px 0 0 0; font-size: 21px; font-weight: 700; line-height: 27px;">
+                          {{ titulo_cultura }}
+                        </h2>
+                      </td>
+                      <td align="right" valign="top">
+                        <span class="badge" style="font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 11px; padding: 4px 10px; border-radius: 999px; white-space: nowrap;">
+                          {{ minutos_cultura }} min
+                        </span>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="px" style="padding: 8px 32px 8px 32px;">
+                  {% for parrafo in cultura_parrafos %}
+                  <p class="txt-body" style="margin: 0 0 14px 0; font-size: 16px; line-height: 26px;">{{ parrafo }}</p>
+                  {% endfor %}
+
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin: 18px 0;">
+                    <tr>
+                      <td class="badge" style="border-radius: 10px; padding: 14px 16px;">
+                        <p class="txt-muted" style="margin: 0 0 4px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                          Para la sobremesa
+                        </p>
+                        <p style="margin:0; font-size: 15.5px; line-height: 23px; font-style: italic;">
+                          &ldquo;{{ dato_sobremesa }}&rdquo;
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+
+                  {% if tirar_del_hilo_texto %}
+                  <p class="txt-muted" style="margin: 18px 0 4px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                    Si quieres tirar del hilo
+                  </p>
+                  <p class="txt-body" style="margin: 0; font-size: 15px; line-height: 23px;">{{ tirar_del_hilo_texto }}</p>
+                  {% endif %}
+                </td>
+              </tr>
+
+              <!-- Fuentes -->
+              <tr>
+                <td class="px" style="padding: 26px 32px 24px 32px;">
+                  <div class="rule" style="margin: 0 0 16px 0;"></div>
+                  <p class="txt-muted" style="margin: 0 0 8px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;">
+                    Fuentes
+                  </p>
+                  {% for f in fuentes %}
+                  <p class="txt-muted" style="margin: 0 0 5px 0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12.5px; line-height: 19px;">
+                    <a href="{{ f.url }}" class="txt-accent" style="text-decoration: none;">{{ f.medio }}</a> &middot; {{ f.fecha_publicacion }}
+                  </p>
+                  {% endfor %}
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+
+        <!-- Pie -->
+        <tr>
+          <td align="center" style="padding: 22px 24px 8px 24px;">
+            <p class="txt-muted" style="margin:0; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 18px;">
+              <a href="{{ url_historial }}" class="txt-accent" style="text-decoration: none;">Ver el histórico completo</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

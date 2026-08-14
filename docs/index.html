@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing diario</title>
+<meta name="description" content="Cinco minutos de actualidad y diez de cultura general. Cada manana.">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="brand" href="index.html">Briefing diario</a>
+    <button class="theme-toggle" id="theme-toggle" type="button">Cambiar tema</button>
+  </header>
+
+  <h1>Briefing diario</h1>
+  <p class="meta">Cinco minutos de actualidad y diez de cultura general. Cada manana.</p>
+
+  <div class="search-row">
+    <input type="search" id="buscador" placeholder="Buscar por titular o tema…" autocomplete="off">
+    <select id="filtro-categoria">
+      <option value="">Todas las categorías</option>
+    </select>
+  </div>
+
+  <ul class="lista-briefings" id="lista">
+  </ul>
+
+  <footer class="site">
+    Generado automáticamente cada mañana. 0 briefings en el histórico.
+  </footer>
+</div>
+<script src="assets/theme.js"></script>
+<script>
+  (function () {
+    var input = document.getElementById("buscador");
+    var select = document.getElementById("filtro-categoria");
+    var items = Array.prototype.slice.call(document.querySelectorAll("#lista li"));
+
+    function normalizar(s) {
+      return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    }
+
+    function filtrar() {
+      var q = normalizar(input.value);
+      var cat = select.value;
+      items.forEach(function (li) {
+        var titulo = normalizar(li.getAttribute("data-titulo"));
+        var categoria = li.getAttribute("data-categoria");
+        var pasaTexto = !q || titulo.indexOf(q) !== -1;
+        var pasaCategoria = !cat || categoria === cat;
+        li.style.display = (pasaTexto && pasaCategoria) ? "" : "none";
+      });
+    }
+
+    input.addEventListener("input", filtrar);
+    select.addEventListener("change", filtrar);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+name: Briefing diario
+
+# Dos cron en UTC para cubrir las dos posiciones posibles de las 06:05 hora
+# de Madrid a lo largo del año (CET = UTC+1 en invierno, CEST = UTC+2 en
+# verano). GitHub Actions no ajusta por huso horario ni por horario de
+# verano, así que disparamos en ambos y un guard (paso "hora") aborta el
+# que no corresponda al día de hoy. El cron real de GitHub puede retrasarse
+# unos minutos en horas punta — el guard acepta una ventana, no un instante
+# exacto.
+on:
+  schedule:
+    - cron: "5 5 * * *"   # 06:05 CET (invierno) = 05:05 UTC
+    - cron: "5 4 * * *"   # 06:05 CEST (verano)  = 04:05 UTC
+  workflow_dispatch: {}    # para probar manualmente sin esperar al cron
+
+concurrency:
+  group: briefing-diario
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+  actions: read
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Comprobar que toca ejecutar ahora (guard de horario Madrid)
+        id: hora
+        run: |
+          # Solo uno de los dos disparos de cron debe pasar de aquí. Se
+          # acepta una ventana de +/-20 min alrededor de la hora objetivo
+          # para absorber el retraso típico de los cron de GitHub Actions.
+          # 06:05 debe mantenerse en sync con config.yaml -> entrega.hora_local
+          ahora_madrid=$(TZ=Europe/Madrid date +%H:%M)
+          fecha_madrid=$(TZ=Europe/Madrid date +%F)
+          ahora_minutos=$((10#$(TZ=Europe/Madrid date +%H) * 60 + 10#$(TZ=Europe/Madrid date +%M)))
+          objetivo_minutos=$((6 * 60 + 5))
+          if [ "$ahora_minutos" -gt "$objetivo_minutos" ]; then
+            diferencia=$((ahora_minutos - objetivo_minutos))
+          else
+            diferencia=$((objetivo_minutos - ahora_minutos))
+          fi
+          echo "Hora actual en Madrid: $ahora_madrid (objetivo 06:05, diferencia ${diferencia} min)"
+          echo "fecha=$fecha_madrid" >> "$GITHUB_OUTPUT"
+          if [ "$diferencia" -le 20 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "procede=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "procede=false" >> "$GITHUB_OUTPUT"
+            echo "Fuera de ventana — este disparo de cron no corresponde a hoy. Abortando sin error."
+          fi
+
+      - uses: actions/setup-python@v5
+        if: steps.hora.outputs.procede == 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        if: steps.hora.outputs.procede == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Comprobar idempotencia (¿ya se publicó hoy?)
+        id: idempotencia
+        if: steps.hora.outputs.procede == 'true'
+        env:
+          BRIEFING_DATE: ${{ steps.hora.outputs.fecha }}
+        run: |
+          ya=$(python src/cli.py already-done)
+          echo "ya_publicado=$ya" >> "$GITHUB_OUTPUT"
+          echo "¿Ya publicado hoy ($BRIEFING_DATE)? $ya"
+
+      - name: Preparar work/
+        if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
+        run: mkdir -p work
+
+      # --- Intento 1: investigación, redacción, verificación ---
+
+      - name: "[1/3] Investigación (intento 1)"
+        if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-research\n\nFecha del briefing (Europe/Madrid): ${{ steps.hora.outputs.fecha }}."
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
+
+      - name: "[2/3] Redacción (intento 1)"
+        if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-write"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.00"
+
+      - name: "[3/3] Verificación (intento 1)"
+        if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-verify"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.25"
+
+      - name: Validar (intento 1)
+        id: validar1
+        if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
+        continue-on-error: true
+        env:
+          BRIEFING_DATE: ${{ steps.hora.outputs.fecha }}
+        run: python src/cli.py finalize --dry-run
+
+      # --- Intento 2: solo si el intento 1 no validó ---
+
+      - name: Limpiar work/ para reintento
+        if: steps.validar1.outcome == 'failure'
+        run: rm -f work/research.json work/draft.json work/final.json
+
+      - name: "[1/3] Investigación (intento 2)"
+        if: steps.validar1.outcome == 'failure'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-research\n\nFecha del briefing (Europe/Madrid): ${{ steps.hora.outputs.fecha }}."
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
+
+      - name: "[2/3] Redacción (intento 2)"
+        if: steps.validar1.outcome == 'failure'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-write"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.00"
+
+      - name: "[3/3] Verificación (intento 2)"
+        if: steps.validar1.outcome == 'failure'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: "/briefing-verify"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.25"
+
+      - name: Validar (intento 2)
+        id: validar2
+        if: steps.validar1.outcome == 'failure'
+        continue-on-error: true
+        env:
+          BRIEFING_DATE: ${{ steps.hora.outputs.fecha }}
+        run: python src/cli.py finalize --dry-run
+
+      # --- Publicación (si algún intento validó) o aviso de fallo ---
+
+      - name: Publicar y enviar
+        id: publicar
+        if: >
+          steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false' &&
+          (steps.validar1.outcome == 'success' || steps.validar2.outcome == 'success')
+        env:
+          BRIEFING_DATE: ${{ steps.hora.outputs.fecha }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python src/cli.py finalize
+
+      - name: Aviso de fallo (ningún intento validó)
+        if: >
+          steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false' &&
+          steps.validar1.outcome == 'failure' && steps.validar2.outcome == 'failure'
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          python src/cli.py failure-notice \
+            --motivo "La validación falló en los dos intentos" \
+            --detalle "Revisa el log del run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Commit y push del briefing publicado
+        if: steps.publicar.outcome == 'success'
+        run: |
+          git config user.name "briefing-diario-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add briefings/ docs/ state/
+          if git diff --cached --quiet; then
+            echo "Sin cambios que commitear."
+          else
+            git commit -m "Briefing del ${{ steps.hora.outputs.fecha }}"
+            git push
+          fi
+
+      - name: Subir logs de trabajo como artefacto
+        if: always() && steps.hora.outputs.procede == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: briefing-work-${{ github.run_id }}
+          path: work/
+          retention-days: 14
+          if-no-files-found: ignore

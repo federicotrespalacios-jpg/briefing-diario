@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ fecha_larga }} — {{ sitio_titulo }}</title>
+<meta name="description" content="{{ meta_descripcion }}">
+<link rel="stylesheet" href="{{ ruta_assets }}/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="brand" href="{{ ruta_raiz }}index.html">{{ sitio_titulo }}</a>
+    <button class="theme-toggle" id="theme-toggle" type="button">Cambiar tema</button>
+  </header>
+
+  <h1>{{ fecha_larga }}</h1>
+  <p class="meta">{{ minutos_actualidad }} min de actualidad · {{ minutos_cultura }} min de cultura general</p>
+
+  <div class="card">
+    <h2>Actualidad</h2>
+    <p style="font-style: italic;">{{ arranque }}</p>
+    {% for historia in historias %}
+    <h3>{{ historia.titular_editorial }}</h3>
+    {% for parrafo in historia.parrafos %}
+    <p>{{ parrafo }}</p>
+    {% endfor %}
+    {% endfor %}
+    <hr class="rule">
+    <p class="meta" style="text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 4px;">En el radar</p>
+    <p>{{ radar_texto }}</p>
+  </div>
+
+  <div class="card">
+    <span class="badge">{{ categoria_cultura }}</span>
+    <h2>{{ titulo_cultura }}</h2>
+    {% for parrafo in cultura_parrafos %}
+    <p>{{ parrafo }}</p>
+    {% endfor %}
+    <div class="pull">&ldquo;{{ dato_sobremesa }}&rdquo;</div>
+    {% if tirar_del_hilo_texto %}
+    <p class="meta" style="text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 4px;">Si quieres tirar del hilo</p>
+    <p>{{ tirar_del_hilo_texto }}</p>
+    {% endif %}
+  </div>
+
+  <div class="card fuentes">
+    <p class="meta" style="text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 8px;">Fuentes</p>
+    {% for f in fuentes %}
+    <p><a href="{{ f.url }}">{{ f.medio }}</a> · {{ f.fecha_publicacion }}</p>
+    {% endfor %}
+  </div>
+
+  <footer class="site">
+    <a href="{{ ruta_raiz }}index.html">&larr; Volver al histórico</a>
+  </footer>
+</div>
+<script src="{{ ruta_assets }}/theme.js"></script>
+</body>
+</html>

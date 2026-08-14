@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ sitio_titulo }}</title>
+<meta name="description" content="{{ sitio_descripcion }}">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <a class="brand" href="index.html">{{ sitio_titulo }}</a>
+    <button class="theme-toggle" id="theme-toggle" type="button">Cambiar tema</button>
+  </header>
+
+  <h1>{{ sitio_titulo }}</h1>
+  <p class="meta">{{ sitio_descripcion }}</p>
+
+  <div class="search-row">
+    <input type="search" id="buscador" placeholder="Buscar por titular o tema…" autocomplete="off">
+    <select id="filtro-categoria">
+      <option value="">Todas las categorías</option>
+      {% for cat in categorias %}
+      <option value="{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <ul class="lista-briefings" id="lista">
+    {% for b in briefings %}
+    <li data-titulo="{{ b.titulo_busqueda }}" data-categoria="{{ b.categoria }}">
+      <a class="fecha" href="{{ b.url }}">{{ b.fecha_larga }}</a>
+      <div class="resumen">
+        <span class="badge">{{ b.categoria }}</span>
+        &nbsp;{{ b.titulo_cultura }}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <footer class="site">
+    Generado automáticamente cada mañana. {{ total_briefings }} briefings en el histórico.
+  </footer>
+</div>
+<script src="assets/theme.js"></script>
+<script>
+  (function () {
+    var input = document.getElementById("buscador");
+    var select = document.getElementById("filtro-categoria");
+    var items = Array.prototype.slice.call(document.querySelectorAll("#lista li"));
+
+    function normalizar(s) {
+      return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    }
+
+    function filtrar() {
+      var q = normalizar(input.value);
+      var cat = select.value;
+      items.forEach(function (li) {
+        var titulo = normalizar(li.getAttribute("data-titulo"));
+        var categoria = li.getAttribute("data-categoria");
+        var pasaTexto = !q || titulo.indexOf(q) !== -1;
+        var pasaCategoria = !cat || categoria === cat;
+        li.style.display = (pasaTexto && pasaCategoria) ? "" : "none";
+      });
+    }
+
+    input.addEventListener("input", filtrar);
+    select.addEventListener("change", filtrar);
+  })();
+</script>
+</body>
+</html>
