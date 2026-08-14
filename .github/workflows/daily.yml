@@ -88,7 +88,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-research\n\nFecha del briefing (Europe/Madrid): ${{ steps.hora.outputs.fecha }}."
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.50"
 
       - name: "[2/3] Redacción (intento 1)"
         if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
@@ -97,7 +97,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-write"
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.00"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
 
       - name: "[3/3] Verificación (intento 1)"
         if: steps.hora.outputs.procede == 'true' && steps.idempotencia.outputs.ya_publicado == 'false'
@@ -106,7 +106,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-verify"
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.25"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.50"
 
       - name: Validar (intento 1)
         id: validar1
@@ -129,7 +129,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-research\n\nFecha del briefing (Europe/Madrid): ${{ steps.hora.outputs.fecha }}."
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.50"
 
       - name: "[2/3] Redacción (intento 2)"
         if: steps.validar1.outcome == 'failure'
@@ -138,7 +138,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-write"
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.00"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 3.00"
 
       - name: "[3/3] Verificación (intento 2)"
         if: steps.validar1.outcome == 'failure'
@@ -147,7 +147,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           show_full_output: true
           prompt: "/briefing-verify"
-          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.25"
+          claude_args: "--model claude-sonnet-5 --max-budget-usd 2.50"
 
       - name: Validar (intento 2)
         id: validar2

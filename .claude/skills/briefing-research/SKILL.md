@@ -82,6 +82,25 @@ medios reproduciendo el mismo teletipo de agencia **no son dos fuentes**: es
 una. Busca confirmación en cadenas editoriales distintas, o mejor, la fuente
 primaria más un medio de referencia.
 
+**Verificación de fecha, obligatoria y literal, antes de dar una fuente por
+buena — esto no es opcional ni "a ojo".** Un validador de código va a rechazar
+el build entero si una sola fuente de actualidad supera las 72h, así que no
+basta con "buscar noticias recientes": para cada URL que vayas a poner en
+`fuentes`, mira el dato de fecha que te devolvió la búsqueda o la página y
+calcula tú mismo cuántas horas han pasado desde hoy. Si no encuentras la
+fecha exacta de un resultado, ábrelo con `WebFetch` para confirmarla antes de
+citarlo — no asumas que "salió esta semana" es lo mismo que "salió en las
+últimas 72h".
+
+Es un error común y caro citar el artículo *fundacional* de una historia (el
+que la destapó, publicado hace días) en vez del artículo que la sigue
+*hoy*. Si una historia sigue siendo relevante pero el hecho que la originó
+ocurrió hace más de 72h, busca específicamente la cobertura de **hoy o
+ayer** sobre su desarrollo actual — ahí es donde vive tu fuente válida, no en
+la pieza original. Si de verdad no existe ninguna fuente de las últimas 72h
+para una historia, esa historia no pasa la Fase 2: descártala y elige otra,
+por importante que parezca.
+
 Anota también los descartes relevantes y por qué los descartaste. Sirve para
 auditar el criterio.
 

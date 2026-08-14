@@ -105,15 +105,16 @@ modelo:
   # no dinero adicional -- pero es el numero mas honesto disponible para
   # poner un techo real por fase. `claude --help` no expone `--max-turns`
   # en la version actual del CLI (2.1.228): el control real de gasto es
-  # `--max-budget-usd`, medido en vivo el 2026-08-12/13:
-  #   investigacion (sin tope): $2.34  -- redaccion (sin tope): $1.66
-  #   verificacion (sin tope, 54 turnos): $3.08
-  # Los topes de abajo dejan margen sobre lo medido para investigacion y
-  # redaccion, y BAJAN el de verificacion a proposito para forzar que sea
-  # mas selectiva en que verifica -- ver briefing-verify/SKILL.md.
-  max_budget_usd_research: 3.00
-  max_budget_usd_write: 2.00
-  max_budget_usd_verify: 2.25
+  # `--max-budget-usd`.
+  #
+  # Medido en vivo, dos runs distintos (2026-08-12 a 2026-08-14):
+  #   investigacion: $2.34 y ~$2-3          -- redaccion: $1.66 y $2.01 (tope alcanzado)
+  #   verificacion:  $3.08 (sin tope, 54 turnos)
+  # $2.00 en redaccion resulto ser demasiado justo -- un run real lo supero
+  # y se corto a mitad de trabajo. Subido con mas margen.
+  max_budget_usd_research: 3.50
+  max_budget_usd_write: 3.00
+  max_budget_usd_verify: 2.50
 
 validacion:
   # 404 o DNS inexistente rompen el build. 403/429 solo avisan:
