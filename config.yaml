@@ -133,5 +133,5 @@ fallo:
 web:
   titulo: "Briefing diario"
   descripcion: "Cinco minutos de actualidad y diez de cultura general. Cada manana."
-  url_base: ""  # se rellena tras activar GitHub Pages
+  url_base: "https://federicotrespalacios-jpg.github.io/briefing-diario"
   briefings_por_pagina: 30
