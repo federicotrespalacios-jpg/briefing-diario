@@ -205,7 +205,8 @@ def cmd_finalize(args: argparse.Namespace) -> int:
 
     if not RESEARCH_PATH.exists() or not FINAL_PATH.exists():
         log(f"Faltan {RESEARCH_PATH.name} o {FINAL_PATH.name} en work/. ¿Corrieron las skills?")
-        return _fallo(config, "Faltan los archivos de trabajo de las skills", dry_run)
+        _fallo(config, "Faltan los archivos de trabajo de las skills", dry_run)
+        return 1  # finalize no produjo un briefing -- falla siempre, sin importar si el aviso se envió
 
     resultado, briefing = validar_con_degradacion(
         FINAL_PATH, RESEARCH_PATH, USED_TOPICS_PATH, config,
@@ -217,7 +218,8 @@ def cmd_finalize(args: argparse.Namespace) -> int:
         if dry_run:
             log("\n[dry-run] Validación fallida. No se envía nada.")
             return 1
-        return _fallo(config, "La validación (con degradación) falló", dry_run, detalle=resultado.render_reporte())
+        _fallo(config, "La validación (con degradación) falló", dry_run, detalle=resultado.render_reporte())
+        return 1  # idem -- el build falló, independientemente de si el email de aviso salió bien
 
     if dry_run:
         return _render_preview(briefing, config)
@@ -330,6 +332,12 @@ def _env_o_falla(nombre: str) -> str:
 
 
 def _fallo(config: dict, motivo: str, dry_run: bool, detalle: str = "") -> int:
+    """Envía el email corto de aviso. El valor de retorno describe SOLO si
+    el aviso se mandó bien (0) o no (1) -- no dice nada sobre si el build en
+    sí falló, porque eso ya lo sabe el llamador por definición (por algo
+    está llamando a esta función). `cmd_finalize` ignora este valor a
+    propósito y siempre devuelve 1 en sus propios call sites: un email de
+    aviso enviado con éxito no convierte un build fallido en un éxito."""
     log(f"\nFALLO: {motivo}")
     if dry_run:
         log("[dry-run] no se envía email de aviso.")
@@ -347,7 +355,8 @@ def _fallo(config: dict, motivo: str, dry_run: bool, detalle: str = "") -> int:
         url_logs=os.environ.get("GITHUB_RUN_URL", ""),
         reintentos=config["fallo"]["reintentos_por_fase"],
     )
-    return 1
+    log("aviso de fallo enviado correctamente.")
+    return 0
 
 
 # ---------------------------------------------------------------------------

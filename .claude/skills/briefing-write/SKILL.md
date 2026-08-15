@@ -76,17 +76,28 @@ compactadas — nombra la cosa, no la expliques otra vez.
 
 ## Sección 2 — Cultura general (1400-1700 palabras)
 
-**Gancho (1 párrafo corto).** Una escena, una pregunta imposible, o un dato
-que descoloque. **Nunca una definición.** Nunca "hoy vamos a hablar de...".
-Usa el `angulo` de `research.json` como punto de entrada.
+**Aritmética que tienes que cuadrar de verdad**: 1400-1700 palabras en
+gancho + desarrollo + cierre significa, con la estructura de abajo,
+párrafos de **200-280 palabras cada uno** (4-6 frases con desarrollo real,
+no 2-3 frases sueltas). Un párrafo de 100 palabras es la mitad de corto de
+lo que hace falta — si te quedas ahí, el texto entero se va a quedar corto
+sin que lo notes hasta el final. Piensa en cada párrafo como un mini-bloque
+con espacio para plantear algo, desarrollarlo con un dato o una escena, y
+cerrarlo — no una frase-titular seguida de la siguiente.
 
-**Desarrollo narrativo, en 3-4 párrafos, no más.** Cuenta una historia, no
-expliques un tema — pero cada párrafo tiene que ganarse el sitio: si un
-párrafo es color o textura sin aportar un hecho nuevo o mover la historia,
-fuera. Si hay personajes (`personajes` en el JSON), dales voz y tensión en
-las frases justas, no en una biografía completa. Sigue el `hilo_narrativo`
-como esqueleto, pero comprimido — un beat por párrafo como mucho, nunca un
-beat estirado en dos.
+**Gancho (1 párrafo, ~200 palabras).** Una escena, una pregunta imposible, o
+un dato que descoloque. **Nunca una definición.** Nunca "hoy vamos a hablar
+de...". Usa el `angulo` de `research.json` como punto de entrada, y dale
+espacio real a la escena — no la resumas en una frase y pases a lo
+siguiente.
+
+**Desarrollo narrativo, en 4-5 párrafos de ~220-280 palabras cada uno.**
+Cuenta una historia, no expliques un tema — pero cada párrafo tiene que
+ganarse el sitio: si un párrafo es color o textura sin aportar un hecho
+nuevo o mover la historia, fuera. Si hay personajes (`personajes` en el
+JSON), dales voz y tensión con desarrollo real, no en una frase de
+biografía. Sigue el `hilo_narrativo` como esqueleto, pero cada beat
+necesita su párrafo completo, no una mención de paso.
 
 Integra los `datos_clave` con naturalidad en la narración — no los sueltes
 como una ficha técnica y no te pares a comentar cada uno. Cada cifra o
@@ -94,14 +105,21 @@ afirmación fuerte que uses debe venir de `datos_clave` o `personajes` en el
 JSON; no inventes ni redondees datos que no estén ahí.
 
 **Cierre — "por qué esto te importa hoy" + dato de sobremesa, en un único
-párrafo final.** La conexión con el presente (usa `por_que_importa_hoy`)
-seguida directamente de la frase que el lector podría soltar literalmente
-en una cena esa misma noche (parte de `dato_sobremesa_propuesto`, pulida).
-No los separes en dos párrafos — es un cierre, no dos.
+párrafo final de ~200 palabras.** La conexión con el presente (usa
+`por_que_importa_hoy`) seguida directamente de la frase que el lector
+podría soltar literalmente en una cena esa misma noche (parte de
+`dato_sobremesa_propuesto`, pulida). No los separes en dos párrafos — es un
+cierre, no dos, pero dale desarrollo real antes de la frase final, no la
+sueltes en frío.
 
 **Si quieres tirar del hilo** (opcional, inclúyelo si `research.json` trae
 recomendaciones): 1-2 líneas con las recomendaciones de `tirar_del_hilo`,
-sin desarrollarlas.
+sin desarrollarlas — esto va aparte del recuento de arriba.
+
+Al terminar, si el total te sale por debajo de 1400, casi siempre es porque
+uno o más párrafos se quedaron en 100-150 palabras en vez de 220-280 —
+vuelve a esos párrafos concretos y dales el desarrollo que les falta, no
+añadas un párrafo nuevo de relleno.
 
 Si el borrador te está saliendo por encima de 1700 palabras, el problema casi
 siempre es el mismo: demasiados párrafos de "textura" o de contexto

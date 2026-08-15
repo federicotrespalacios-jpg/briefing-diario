@@ -92,6 +92,14 @@ fecha exacta de un resultado, ábrelo con `WebFetch` para confirmarla antes de
 citarlo — no asumas que "salió esta semana" es lo mismo que "salió en las
 últimas 72h".
 
+**Deja margen de verdad — 60h, no 72h.** El límite duro de 72h lo aplica
+después un validador con la hora exacta del run, que no es la misma hora a
+la que tú estás calculando esto. Una fuente que a ti te parece "justo dentro
+de 72h" puede llegar al validador ya pasada, porque entre que la investigas
+y se publica el briefing pasan horas. Trata **60h** como tu límite real de
+trabajo: si una fuente tiene más de 60h, trátala como si ya hubiera
+caducado y busca una más reciente, no la des por buena "por poco".
+
 Es un error común y caro citar el artículo *fundacional* de una historia (el
 que la destapó, publicado hace días) en vez del artículo que la sigue
 *hoy*. Si una historia sigue siendo relevante pero el hecho que la originó
