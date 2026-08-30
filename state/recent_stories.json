@@ -22,5 +22,29 @@
     "id": "h4",
     "titular": "El nuevo presidente de la Reserva Federal, Kevin Warsh, avisa de que la inflación sigue \"preocupante\" en su primer discurso de Jackson Hole",
     "resumen": "En su primera intervención como presidente de la Fed en el simposio de Jackson Hole, el 28 de agosto, Kevin Warsh dijo estar \"impresionado\" por la fortaleza de la economía estadounidense pero advirtió de que las últimas lecturas de inflación, aunque mejores de lo esperado, \"no indican que las tendencias subyacentes hayan mejorado de forma significativa\". Evitó comprometerse con una guía explícita sobre el rumbo de los tipos antes de la próxima reunión del 16 de septiembre y pidió un banco central \"más silencioso\", señalando que los inversores no deberían mirar a la Fed \"como referencia para su próxima operación\"."
+  },
+  {
+    "fecha": "2026-08-30",
+    "id": "h1",
+    "titular": "EEUU y Venezuela firman un acuerdo para controlar 65.000 millones de barriles de petróleo",
+    "resumen": "El 28 de agosto, Trump anunció un acuerdo entre EEUU y el Gobierno de Venezuela, negociado por el secretario de Estado Marco Rubio, el secretario de Defensa Pete Hegseth y la presidenta en funciones venezolana Delcy Rodríguez. Crea una empresa conjunta con derechos durante 100 años sobre 17 yacimientos con reservas probadas de 65.000 millones de barriles. EEUU recibe el 55% del output efectivo de la nueva compañía, participación accionarial y derecho a comprar petróleo a precio de coste. Se calcula que el acuerdo podría atraer 100.000 millones de dólares de inversión en la industria petrolera venezolana y generar 209.000 millones en impuestos para Caracas."
+  },
+  {
+    "fecha": "2026-08-30",
+    "id": "h2",
+    "titular": "Los mercados casi doblan la apuesta por una subida de tipos de la Fed en septiembre tras el discurso de Warsh",
+    "resumen": "Tras el discurso de Kevin Warsh en Jackson Hole el 28 de agosto —en el que calificó la inflación subyacente de \"preocupante\" pese a datos de verano mejores de lo esperado—, la probabilidad implícita de una subida de tipos de 25 puntos básicos en la reunión del 16-17 de septiembre, medida por la herramienta FedWatch de CME Group, pasó de en torno al 33-35% a más del 50% (55,7% según los datos citados por varios medios el 28-29 de agosto). Warsh señaló que el 54% de los componentes del índice de precios PCE muestran subidas superiores al 3% interanual, y pidió una Fed \"más silenciosa\", evitando comprometerse con una guía explícita."
+  },
+  {
+    "fecha": "2026-08-30",
+    "id": "h3",
+    "titular": "Turquía se lanza a mediar por un corredor seguro en el mar Negro mientras el trigo sigue en máximos de tres años",
+    "resumen": "El 29 de agosto Turquía inició contactos diplomáticos intensivos con Rusia y Ucrania para crear un nuevo mecanismo de navegación segura en el mar Negro, replicando el papel que jugó en la Iniciativa del Grano de 2022. Según la asociación de cereales de Estambul, el bloqueo actual mantiene atrapados unos 100 millones de toneladas de grano y oleaginosas (60 millones rusas, 30-35 millones ucranianas), y los precios ya han subido un 4-4,5%, con riesgo de superar el 10% si no se resuelve en dos meses. En paralelo, los futuros de trigo de diciembre en Chicago siguieron subiendo el 28 de agosto (soft red winter wheat a 7,61 $/bushel, hard red winter a 8,22 $/bushel), niveles no vistos desde 2023, por los ataques continuados a infraestructura portuaria en Rusia y Ucrania."
+  },
+  {
+    "fecha": "2026-08-30",
+    "id": "h4",
+    "titular": "La NASA lanza el telescopio espacial Nancy Grace Roman, su mayor apuesta desde el James Webb",
+    "resumen": "El 30 de agosto a las 7:26 am (hora del este de EEUU) despega desde el Complejo de Lanzamiento 39A de Cabo Cañaveral, a bordo de un cohete Falcon Heavy de SpaceX, el telescopio espacial Nancy Grace Roman de la NASA, tras 16 años de desarrollo. Se dirige al punto de Lagrange Tierra-Sol L2, donde realizará estudios amplios del cielo para investigar la energía oscura y la materia oscura, buscar y caracterizar exoplanetas mediante microlente gravitacional, y cartografiar miles de millones de galaxias. Tiene un espejo de 2,4 metros (igual que el Hubble) pero un campo de visión cientos de veces mayor, generará alrededor de un terabyte de datos al día, y su misión primaria durará cinco años. El equipo de la NASA entregó el proyecto nueve meses antes de la fecha límite formal de mayo de 2027."
   }
 ]
