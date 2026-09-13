@@ -1,29 +1,5 @@
 [
   {
-    "fecha": "2026-08-29",
-    "id": "h1",
-    "titular": "El envoy de EEUU para Gaza advierte de que el alto el fuego está cerca de un \"punto de no retorno\"",
-    "resumen": "El 26 de agosto, Nickolay Mladenov, alto representante del Board of Peace (el organismo liderado por Washington que supervisa la gobernanza, reconstrucción y seguridad de Gaza tras la tregua de octubre de 2025), advirtió ante el Consejo de Seguridad de la ONU que si el alto el fuego colapsa no será \"un contratiempo, sino un punto de no retorno\". Hamás y otras facciones palestinas habían acordado el 30 de julio entregar sus armas y transferir la gobernanza a una administración transitoria reconocida por la ONU, pero el proceso está estancado. El 28 de agosto, el ejército israelí mató a un mando de Hamás y a un comandante de la Yihad Islámica en Gaza, desoyendo las peticiones de EEUU de frenar los ataques mientras avanza el plan de desarme. Netanyahu, por su parte, niega haber aceptado que tropas internacionales entren en Gaza."
-  },
-  {
-    "fecha": "2026-08-29",
-    "id": "h2",
-    "titular": "El trigo toca máximos de tres años al hundirse las exportaciones de Rusia y Ucrania por el mar Negro",
-    "resumen": "Los futuros de trigo de Chicago para entrega en diciembre subieron un 6,4% el 26 de agosto hasta 748,25 centavos por bushel, y el 27-28 de agosto encadenaron sesiones de subida hasta niveles no vistos desde 2022-2023, tras ataques con drones y misiles que han paralizado buena parte de los terminales de grano en los puertos rusos y ucranianos del mar Negro (incluido el cierre de los tres terminales de Novorossiysk). Rusia y Ucrania suponen juntas más de una cuarta parte de las exportaciones mundiales de trigo. El USDA ha rebajado su previsión de exportaciones rusas para la campaña 2026/27 y la demanda se ha desplazado hacia proveedores alternativos: Egipto, el mayor importador mundial de trigo, ya ha comprado cargamentos franceses."
-  },
-  {
-    "fecha": "2026-08-29",
-    "id": "h3",
-    "titular": "La cumbre de la ONU contra la desertificación cierra en Mongolia con 1.300 millones de dólares para restaurar tierra degradada",
-    "resumen": "La COP17 de la Convención de la ONU de Lucha contra la Desertificación (UNCCD), celebrada en Ulán Bator del 17 al 28 de agosto, cerró el 28 de agosto con el anuncio de una cartera de 1.300 millones de dólares de gobiernos, bancos de desarrollo, fondos y empresas para restauración de tierras y resiliencia a la sequía en 23 países de cinco continentes. De esa cifra, 644,5 millones son financiación nueva y 216,4 millones ya están confirmados y en marcha. La pieza central es la Rangelands Flagship Initiative, que moviliza 1.200 millones de dólares en 45 proyectos para restaurar pastizales y sostener a comunidades pastoriles, además de un nuevo Drought Resilience Investment Facility con capacidad de movilizar hasta 400 millones adicionales."
-  },
-  {
-    "fecha": "2026-08-29",
-    "id": "h4",
-    "titular": "El nuevo presidente de la Reserva Federal, Kevin Warsh, avisa de que la inflación sigue \"preocupante\" en su primer discurso de Jackson Hole",
-    "resumen": "En su primera intervención como presidente de la Fed en el simposio de Jackson Hole, el 28 de agosto, Kevin Warsh dijo estar \"impresionado\" por la fortaleza de la economía estadounidense pero advirtió de que las últimas lecturas de inflación, aunque mejores de lo esperado, \"no indican que las tendencias subyacentes hayan mejorado de forma significativa\". Evitó comprometerse con una guía explícita sobre el rumbo de los tipos antes de la próxima reunión del 16 de septiembre y pidió un banco central \"más silencioso\", señalando que los inversores no deberían mirar a la Fed \"como referencia para su próxima operación\"."
-  },
-  {
     "fecha": "2026-08-30",
     "id": "h1",
     "titular": "EEUU y Venezuela firman un acuerdo para controlar 65.000 millones de barriles de petróleo",
@@ -166,5 +142,29 @@
     "id": "h4",
     "titular": "Los incendios de Kalimantan, agravados por un \"súper\" El Niño, se acercan a su pico y ya han cerrado colegios a 200.000 alumnos",
     "resumen": "Según el reportaje del Jakarta Post publicado el 8 de septiembre, los incendios forestales y de turberas en Kalimantan (Borneo indonesio) siguen activos y las autoridades esperan que las próximas semanas sean las más duras de la temporada, con la sequía asociada a un \"súper\" El Niño en su punto máximo. En la regencia de Kubu Raya se han registrado más de 1.400 infecciones respiratorias agudas solo en lo que va de septiembre (tras 6.396 en agosto) y 225 casos de diarrea ligados a la escasez de agua. En Kalimantan Occidental, cientos de colegios han cerrado, afectando a unos 200.000 alumnos que han pasado a clases a distancia. Los equipos sanitarios reparten cerca de 1.000 mascarillas diarias con suministros cada vez más escasos, y los brigadistas voluntarios carecen de equipo adecuado -\"usamos cubos, y ni siquiera esos alcanzan\", declaró un jefe de aldea citado por el diario-. No se espera alivio significativo hasta las lluvias de octubre-noviembre."
+  },
+  {
+    "fecha": "2026-09-13",
+    "id": "h1",
+    "titular": "Un ataque con drones obliga a Arabia Saudí a cerrar su principal oleoducto alternativo al estrecho de Ormuz",
+    "resumen": "En la madrugada del 10 de septiembre, varios drones lanzados desde la provincia iraquí de Maysan impactaron contra el oleoducto East-West de Arabia Saudí (745 millas, entre 4 y 7 millones de barriles diarios de capacidad según la fuente) en las regiones de Riad y Medina, provocando incendios y heridos entre el personal. Arabia Saudí cerró el oleoducto como medida de precaución mientras técnicos evaluaban los daños. Ningún grupo se atribuyó el ataque; el primer ministro iraquí, Ali al-Zaidi, ordenó una investigación y destituyó a un comandante militar, y una coalición paraguas de milicias respaldadas por Irán negó su participación."
+  },
+  {
+    "fecha": "2026-09-13",
+    "id": "h2",
+    "titular": "El mercado da ya casi por segura una subida de tipos de la Fed el miércoles",
+    "resumen": "Tras el dato de IPC de agosto en EEUU (3,4% interanual, con el subyacente subiendo un 0,3% mensual, por encima de lo esperado), la probabilidad de una subida de 25 puntos básicos en la reunión de la Fed del 15-16 de septiembre —medida por la herramienta FedWatch de CME Group— subió a un rango de entre el 85% y el 90%, frente a cerca del 58-60% de la semana previa. El tipo actual es del 3,50%-3,75%, tras mantenerse en la reunión del 29 de julio con una votación dividida de 9 a 3. Los precios del petróleo, por encima de 100 dólares por barril debido a la crisis en Oriente Medio, se suman a la presión inflacionaria."
+  },
+  {
+    "fecha": "2026-09-13",
+    "id": "h3",
+    "titular": "El ébola en el Congo llega a una séptima provincia y roza los 3.400 muertos",
+    "resumen": "El 11 de septiembre, las autoridades de Sud-Ubangi (RDC), provincia fronteriza con la República Centroafricana y Congo-Brazzaville, confirmaron el primer caso de ébola en esa región: un hombre de 23 años que había viajado por varias provincias antes de morir. Es la primera provincia afectada en el oeste del país. Según cifras oficiales, el brote acumula más de 6.942-7.000 casos y 3.349-3.398 muertes. La OMS advirtió de que el brote 'permanece fuera de control' y podría superar al de África Occidental de 2014-2016 (más de 11.325 muertos), el peor de la historia. Está causado por el virus Bundibugyo, para el que las vacunas y tratamientos existentes —diseñados contra la variante Zaire— no son plenamente eficaces; la RDC usa la vacuna Ervebo de forma extraoficial mientras se ensayan alternativas específicas."
+  },
+  {
+    "fecha": "2026-09-13",
+    "id": "h4",
+    "titular": "Kiev dice que las próximas negociaciones de paz podrían ser en octubre, mientras Rusia golpea otra vez la industria siderúrgica ucraniana",
+    "resumen": "El 12 de septiembre, Kyrylo Budanov, jefe de la Oficina Presidencial ucraniana, dijo en el foro Yalta European Strategy en Kiev que se está preparando una nueva ronda de negociaciones trilaterales (Ucrania-EEUU-Rusia) para octubre, sin precisar sede. Es la continuación de la ofensiva diplomática de los enviados de EEUU Steve Witkoff y Jared Kushner, que visitaron Moscú (5 de septiembre) y Kiev (6 de septiembre) por primera vez. En paralelo, la noche del 11 al 12 de septiembre Rusia atacó con cuatro misiles balísticos la planta siderúrgica de Zaporizhstal —el tercer ataque al complejo en un mes, tras los del 11 y 27 de agosto—, hiriendo a cuatro empleados y dañando de forma crítica los altos hornos y el sistema eléctrico de la planta, que aún no había reanudado producción tras los ataques anteriores."
   }
 ]
